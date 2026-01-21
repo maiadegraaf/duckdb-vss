@@ -20,6 +20,7 @@
 #include "duckdb/storage/table/scan_state.hpp"
 #include "duckdb/transaction/duck_transaction.hpp"
 #include "duckdb/storage/storage_index.hpp"
+#include "duckdb/optimizer/optimizer_extension.hpp"
 
 #include "hnsw/hnsw.hpp"
 #include "hnsw/hnsw_index.hpp"
@@ -719,7 +720,7 @@ void HNSWIndexJoinOptimizer::Optimize(OptimizerExtensionInput &input, unique_ptr
 
 void HNSWModule::RegisterJoinOptimizer(DatabaseInstance &db) {
 	// Register the JoinOptimizer
-	db.config.optimizer_extensions.push_back(HNSWIndexJoinOptimizer());
+	OptimizerExtension::Register(db.config, HNSWIndexJoinOptimizer());
 }
 
 } // namespace duckdb
