@@ -6,8 +6,8 @@
 #include "duckdb/catalog/catalog_entry/scalar_function_catalog_entry.hpp"
 #include "duckdb/optimizer/column_binding_replacer.hpp"
 #include "duckdb/optimizer/optimizer.hpp"
+#include "duckdb/optimizer/optimizer_extension.hpp"
 #include "duckdb/main/extension/extension_loader.hpp"
-
 #include "hnsw/hnsw.hpp"
 #include "hnsw/hnsw_index.hpp"
 
@@ -93,7 +93,7 @@ public:
 
 void HNSWModule::RegisterExprOptimizer(DatabaseInstance &db) {
 	// Register the TopKOptimizer
-	db.config.optimizer_extensions.push_back(HNSWExprOptimizer());
+	OptimizerExtension::Register(db.config, HNSWExprOptimizer());
 }
 
 } // namespace duckdb
