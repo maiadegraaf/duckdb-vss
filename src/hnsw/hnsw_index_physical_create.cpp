@@ -283,7 +283,7 @@ public:
 		duck_index.initial_index_size = gstate.global_index->Cast<BoundIndex>().GetInMemorySize();
 
 		// Finally add it to storage
-		storage.AddIndex(std::move(gstate.global_index));
+		storage.AddIndex(std::move(gstate.global_index), duck_index.oid);
 	}
 };
 
